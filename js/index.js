@@ -36,6 +36,29 @@ function unsetFullScreen() {
     }
 }
 
+const colorThemes = document.querySelectorAll('[name="themeswitcher"]');
+
+storeTheme = function(theme) {
+    localStorage.setItem("theme", theme);
+}
+
+retrieveTheme = function() {
+    const activeTheme = localStorage.getItem("theme");
+    colorThemes.forEach(themeOption => {
+        if (themeOption.id === activeTheme) {
+            themeOption.checked = true;
+        }
+    })
+}
+
+colorThemes.forEach(themeOption => {
+    themeOption.addEventListener('click', () => {
+        storeTheme(themeOption.id);
+    })
+})
+
+document.onload = retrieveTheme();
+
 
 /**** POSSIBLE FRAMEWORK FOR STORING EXTRANEOUS CONTENT ELSEWHERE UNTIL IT NEEDS TO LOAD, CUTTING DOWN ON LOADING TIME ****/
 /* const projects = document.getElementById("projectcontainer");
